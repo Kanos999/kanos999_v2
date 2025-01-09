@@ -36,51 +36,57 @@ export default function Home() {
         </div>
 
         <div className={`${poppins.className} absolute top-0 flex flex-col`}>
-          <div className="z-30 w-full p-12 md:fixed md:top-12 md:h-full md:w-1/2 xl:pl-60 md:pr-24">
+          <div className="z-30 w-full md:top-12">
+
             {/* border-sky-500/10 bg-sky-900/20 */}
             <div className="rounded-md p-12 md:w-auto w-full
-                            backdrop-blur-sm bg-slate-800/30 shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] drop-shadow-lg"> 
+                             text-white shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] drop-shadow-lg"> 
               {/* <div className="rounded-full bg-gray-700 aspect-square h-6 my-4 left-0 right-0 mx-auto"></div>
               <div className="w-full h-12 bg-gray-300"></div> */}
               <div className={poppinsBold.className}><div className="text-4xl ">Kane Jackson</div></div>
               <div className="text-md mt-4">Mechatronics / Computer Science</div>
             </div>
-          </div>
 
-          <div className="md:top-0 md:left-1/2 z-20 w-full h-full flex justify-end pointer-events-none">
-            <div className="md:w-1/2 xl:pr-40 xl:pl-12">
-
-              <div className={`${poppinsBold.className} z-30 sticky top-0 md:relative p-6 pl-12 text-2xl mt-36 
-                              backdrop-blur-sm bg-slate-800/30 shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] drop-shadow-lg
-                              md:backdrop-blur-none md:bg-slate-800/0 md:shadow-none md:drop-shadow-none md:pl-6`}>
-                tl;dr
-              </div>
-              <div className="m-12 md:m-6 rounded-lg text-slate-400 duration-200 leading-loose">
-                I am a student at the University of New South Wales, pursuing a dual degree in Mechatronics and Computer Science. 
-                I am deeply fascinated by the world of coding and robotics, and I love to explore the possibilities of technology 
-                through innovation and creativity.
-                <br />
-                Apart from my academic pursuits, I enjoy playing the piano, reading, playing chess, and snowboarding. 
-                Additionally, I am captivated by space and the extraordinary accomplishments exhibited in the aerospace 
-                industry, and I wish to contribute to the space industry in the future.
-              </div>
-
-              <div className={`${poppinsBold.className} z-30 sticky top-0 md:relative p-6 pl-12 text-2xl mt-36 
-                              backdrop-blur-sm bg-slate-800/30 shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] drop-shadow-lg
-                              md:backdrop-blur-none md:bg-slate-800/0 md:shadow-none md:drop-shadow-none md:pl-6`}>
-                Projects
-              </div>
-              <div className="p-12 rounded-md">asjdhaksdj</div>
-
-
-              <div className={`${poppinsBold.className} z-30 sticky top-0 md:relative p-6 pl-12 text-2xl mt-36 
-                              backdrop-blur-sm bg-slate-800/30 shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] drop-shadow-lg
-                              md:backdrop-blur-none md:bg-slate-800/0 md:shadow-none md:drop-shadow-none md:pl-6`}>
-                Career
-              </div>
-
+            <div className="flex flex-row p-8 w-full">
+              <a href="#about" className="rounded-full ring-offset-2 ring-2 m-2 py-2 px-4 w-1/3">About</a>
+              <a className="rounded-full ring-offset-2 ring-2 m-2 py-2 px-4 w-1/3">Projects</a>
+              <a className="rounded-full ring-offset-2 ring-2 m-2 py-2 px-4 w-1/3">Career</a>
             </div>
+
+            <div className="z-20 w-full h-full flex pointer-events-none">
+              <div className="md:w-1/2 xl:pr-40 xl:pl-12">
+
+                <div className={`${poppinsBold.className} z-30 sticky top-0 md:relative p-6 pl-12 text-2xl mt-36 
+                                backdrop-blur-sm bg-slate-800/30 shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] drop-shadow-lg
+                                md:backdrop-blur-none md:bg-slate-800/0 md:shadow-none md:drop-shadow-none md:pl-6`}
+                  id="about">
+                  tl;dr
+                </div>
+                <div className="m-12 md:m-6 rounded-lg text-slate-400 duration-200 leading-loose">
+                  Passionate about leveraging software development and robotics to drive innovation in the space industry. 
+                  My journey as a coder and problem-solver has been fueled by a fascination with the limitless possibilities 
+                  of technology and a deep admiration for the extraordinary accomplishments of the aerospace sector &#128640;
+                </div>
+
+                <div className={`${poppinsBold.className} z-30 sticky top-0 md:relative p-6 pl-12 text-2xl mt-36 
+                                backdrop-blur-sm bg-slate-800/30 shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] drop-shadow-lg
+                                md:backdrop-blur-none md:bg-slate-800/0 md:shadow-none md:drop-shadow-none md:pl-6`}>
+                  Projects
+                </div>
+                <div className="p-12 rounded-md">asjdhaksdj</div>
+
+
+                <div className={`${poppinsBold.className} z-30 sticky top-0 md:relative p-6 pl-12 text-2xl mt-36 
+                                backdrop-blur-sm bg-slate-800/30 shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] drop-shadow-lg
+                                md:backdrop-blur-none md:bg-slate-800/0 md:shadow-none md:drop-shadow-none md:pl-6`}>
+                  Career
+                </div>
+
+              </div>
+            </div>
+
           </div>
+          
         </div>
       </div>
     </main>
@@ -159,7 +165,9 @@ const Background = ({ perlin, currentSection, setCurrentSection }) => {
           return <div key={key}>{i}</div>;
         })}
       </div>
-      <div
+
+      {/* Manually plice text into background ocean */}
+      {/* <div
         onClick={() => {setCurrentSection("About me")}}
         className={`z-40 -mt-1 top-[22rem] ml-72 p-0 m-0 fixed bg-zinc-950 text-slate-400 h-auto w-auto transition-all duration-150 cursor-pointer hover:text-slate-100`}>
         {currentSection === "About me" ? "-- " : ""} About me
@@ -173,7 +181,7 @@ const Background = ({ perlin, currentSection, setCurrentSection }) => {
         onClick={() => {setCurrentSection("Career")}}
         className={`z-40 -mt-1 top-[28rem] ml-72 p-0 m-0 fixed bg-zinc-950 text-slate-400 h-auto w-auto transition-all duration-150 cursor-pointer hover:text-slate-100`}>
         {currentSection === "Career" ? "-- " : ""} Career
-      </div>
+      </div> */}
     </main>
   );
 }
