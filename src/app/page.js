@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import { createNoise3D } from 'simplex-noise';
-import { Courier_Prime, Poppins } from "next/font/google";
+import { Courier_Prime, Poppins, Homemade_Apple } from "next/font/google";
 import { useInterval } from '../util/useInterval'
 import alea from 'alea';
 
@@ -23,6 +23,31 @@ const poppinsBold = Poppins({
   weight: '600',
   display: 'swap',
 })
+const cedarville = Homemade_Apple({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+})
+
+const career = [
+  {
+    position: "Mechanical Engineering Intern",
+    company: "ANT61",
+    description: "Satellite testing and validation"
+  },
+  {
+    position: "Lead Software Engineer",
+    company: "InnerSteps",
+    description: "• Coordinated with a team of skilled engineers to deliver a high-quality, child-friendly mobile app for InnerSteps. \
+                  • Produced an MVP in a few months, leading to a user base growth of over 700. \
+                  • Implemented agile methodologies to ensure efficient project delivery and meet tight deadlines."
+  },
+  {
+    position: "Software Engineer",
+    company: "Gaming Entertainment Systems",
+    description: "CAD/CAM, Javascript, Node.js..."
+  }
+];
 
 export default function Home() {
   const perlin = createNoise3D();
@@ -36,54 +61,45 @@ export default function Home() {
         </div>
 
         <div className={`${poppins.className} absolute top-0 flex flex-col`}>
-          <div className="z-30 w-full md:top-12">
+          <div className=" w-full md:top-12">
 
             {/* border-sky-500/10 bg-sky-900/20 */}
-            <div className="rounded-md p-12 md:w-auto w-full
-                             text-white shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] drop-shadow-lg"> 
+            <div className="rounded-md px-12 mt-48 mb-6 md:w-auto w-full text-white"> 
               {/* <div className="rounded-full bg-gray-700 aspect-square h-6 my-4 left-0 right-0 mx-auto"></div>
               <div className="w-full h-12 bg-gray-300"></div> */}
-              <div className={poppinsBold.className}><div className="text-4xl ">Kane Jackson</div></div>
+              <div className={`${cedarville.className} text-md  italic text-white/80`}>Hi! My name is</div>
+              <div className={poppinsBold.className}><div className="text-4xl">Kane Jackson</div></div>
               <div className="text-md mt-4">Mechatronics / Computer Science</div>
             </div>
 
-            <div className="flex flex-row p-8 w-full">
-              <a href="#about" className="rounded-full ring-offset-2 ring-2 m-2 py-2 px-4 w-1/3">About</a>
-              <a className="rounded-full ring-offset-2 ring-2 m-2 py-2 px-4 w-1/3">Projects</a>
-              <a className="rounded-full ring-offset-2 ring-2 m-2 py-2 px-4 w-1/3">Career</a>
-            </div>
-
-            <div className="z-20 w-full h-full flex pointer-events-none">
-              <div className="md:w-1/2 xl:pr-40 xl:pl-12">
-
-                <div className={`${poppinsBold.className} z-30 sticky top-0 md:relative p-6 pl-12 text-2xl mt-36 
-                                backdrop-blur-sm bg-slate-800/30 shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] drop-shadow-lg
-                                md:backdrop-blur-none md:bg-slate-800/0 md:shadow-none md:drop-shadow-none md:pl-6`}
-                  id="about">
-                  tl;dr
-                </div>
-                <div className="m-12 md:m-6 rounded-lg text-slate-400 duration-200 leading-loose">
-                  Passionate about leveraging software development and robotics to drive innovation in the space industry. 
-                  My journey as a coder and problem-solver has been fueled by a fascination with the limitless possibilities 
-                  of technology and a deep admiration for the extraordinary accomplishments of the aerospace sector &#128640;
-                </div>
-
-                <div className={`${poppinsBold.className} z-30 sticky top-0 md:relative p-6 pl-12 text-2xl mt-36 
-                                backdrop-blur-sm bg-slate-800/30 shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] drop-shadow-lg
-                                md:backdrop-blur-none md:bg-slate-800/0 md:shadow-none md:drop-shadow-none md:pl-6`}>
-                  Projects
-                </div>
-                <div className="p-12 rounded-md">asjdhaksdj</div>
-
-
-                <div className={`${poppinsBold.className} z-30 sticky top-0 md:relative p-6 pl-12 text-2xl mt-36 
-                                backdrop-blur-sm bg-slate-800/30 shadow-[inset_0_1px_0_0_rgba(148,163,184,0.1)] drop-shadow-lg
-                                md:backdrop-blur-none md:bg-slate-800/0 md:shadow-none md:drop-shadow-none md:pl-6`}>
-                  Career
-                </div>
-
+            <div className="bg-white w-full p-12 rounded-tr-3xl rounded-bl-3xl text-zinc-950/80 relative z-30">
+              {/* Links */}
+              <div className="flex flex-row mb-6">
+                <a href="https://www.linkedin.com/in/kanehjackson/"><img src="linkedin.png" className="opacity-50 mr-6 h-10" /></a>
+                <a href="https://github.com/Kanos999"><img src="github.png" className="opacity-50 mr-4 h-12 -mt-1" /></a>
+                <a href="https://www.instagram.com/kane.json/"><img src="instagram.png" className="opacity-30 mr-6 h-14 -mt-2" /></a>
               </div>
+
+              <div className={`${poppinsBold.className} text-2xl mb-8`}>tl;dr</div>
+              <div className="text-justify">
+                Passionate about leveraging software development and robotics to drive innovation in the space industry. 
+                My journey as a coder and problem-solver has been fueled by a fascination with the limitless possibilities 
+                of technology and a deep admiration for the extraordinary accomplishments of the aerospace sector &#128640;
+              </div>
+              
+              <div className="w-full h-1 border-t border-t-zinc-950/20 my-8"></div>
+
+              <div className={`${poppinsBold.className} text-2xl mb-8`}>Career</div>
+              {career.map((job, i) => {
+                return (<div key={i} className="mb-4">
+                  <div className="font-bold">{job.position}</div>
+                  <div className="italic">{job.company}</div>
+                  
+                </div>);
+              })}
             </div>
+
+            <div className="text-white p-12">{"Made with <3 by @Kanos999"}</div>
 
           </div>
           
