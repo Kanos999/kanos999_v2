@@ -60,11 +60,11 @@ export default function Home() {
           <Background perlin={perlin} currentSection={currentSection} setCurrentSection={setCurrentSection} />
         </div>
 
-        <div className={`${poppins.className} absolute top-0 flex flex-col`}>
+        <div className={`${poppins.className} absolute top-0 flex flex-col justify-center`}>
           <div className=" w-full md:top-12">
 
             {/* border-sky-500/10 bg-sky-900/20 */}
-            <div className="rounded-md px-12 mt-48 mb-6 md:w-auto w-full text-white"> 
+            <div className="rounded-md px-12 mt-48 mb-6  w-full text-white"> 
               {/* <div className="rounded-full bg-gray-700 aspect-square h-6 my-4 left-0 right-0 mx-auto"></div>
               <div className="w-full h-12 bg-gray-300"></div> */}
               <div className={`${cedarville.className} text-md  italic text-white/80`}>Hi! My name is</div>
@@ -94,12 +94,11 @@ export default function Home() {
                 return (<div key={i} className="mb-4">
                   <div className="font-bold">{job.position}</div>
                   <div className="italic">{job.company}</div>
-                  
                 </div>);
               })}
             </div>
 
-            <div className="text-white p-12">{"Made with <3 by @Kanos999"}</div>
+            <div className="text-white p-12 text-center">{"Made with <3 by @Kanos999"}</div>
 
           </div>
           
