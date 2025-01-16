@@ -74,13 +74,19 @@ export default function Home() {
 
             <div className="bg-white w-full p-12 rounded-tr-3xl rounded-bl-3xl text-zinc-950/80 relative z-30">
               {/* Links */}
-              <div className="flex flex-row mb-6">
-                <a href="https://www.linkedin.com/in/kanehjackson/"><img src="linkedin.png" className="opacity-50 mr-6 h-10" /></a>
-                <a href="https://github.com/Kanos999"><img src="github.png" className="opacity-50 mr-4 h-12 -mt-1" /></a>
-                <a href="https://www.instagram.com/kane.json/"><img src="instagram.png" className="opacity-30 mr-6 h-14 -mt-2" /></a>
+              <div className="flex flex-row mb-10">
+                <a href="https://www.linkedin.com/in/kanehjackson/">
+                  <img src="linkedin.png" className="opacity-50 mr-6 h-8" alt="Kane Jackson on LinkedIn" />
+                </a>
+                <a href="https://github.com/Kanos999">
+                  <img src="github.png" className="opacity-50 mr-4 h-10 -mt-1" alt="Kane Jackson on GitHub" />
+                </a>
+                <a href="https://www.instagram.com/kane.json/">
+                  <img src="instagram.png" className="opacity-30 mr-6 h-12 -mt-2" alt="Kane Jackson on Instagram" />
+                </a>
               </div>
 
-              <div className={`${poppinsBold.className} text-2xl mb-8`}>tl;dr</div>
+              <div className={`${poppinsBold.className} text-2xl mb-8 font-bold`}>tl;dr</div>
               <div className="text-justify">
                 Passionate about leveraging software development and robotics to drive innovation in the space industry. 
                 My journey as a coder and problem-solver has been fueled by a fascination with the limitless possibilities 
@@ -89,7 +95,7 @@ export default function Home() {
               
               <div className="w-full h-1 border-t border-t-zinc-950/20 my-8"></div>
 
-              <div className={`${poppinsBold.className} text-2xl mb-8`}>Career</div>
+              <div className={`${poppinsBold.className} text-2xl mb-8 font-bold`}>Career</div>
               {career.map((job, i) => {
                 return (<div key={i} className="mb-4">
                   <div className="font-bold">{job.position}</div>
