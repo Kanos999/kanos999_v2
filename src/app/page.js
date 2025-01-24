@@ -106,27 +106,33 @@ export default function Home() {
               <div className="w-full h-1 border-t border-t-zinc-950/20 my-8 md:my-12"></div>
 
               <div className={`${poppinsBold.className} text-2xl mb-6 md:mb-8 font-bold`}>Career</div>
-              {career.map((job, i) => {
-                return (
-                  <div key={i} className="grid grid-cols-1 md:grid-cols-2 gap-4 divide-y divide-gray-200 md:divide-y-0">
-                    {/* Job title, position, company, dates etc */}
-                    <div className="" onClick={() => { setOpenCareerDescription(openCareerDescription == i ? -1 : i) }}>
-                      <div className="font-bold">{job.position}</div>
-                      <div className="italic">{job.company}</div>
-                    </div>
 
-                    {/* Description */}
-                    <div className={`${openCareerDescription == i ? "max-h-96 opacity-100" : "max-h-0 opacity-0"} transition-all duration-500 ease-in-out overflow-y-hidden pl-4 md:max-h-96 md:opacity-100 md:mb-12`}>
-                      <ul className="py-4 md:py-0 text-zinc-500 list-disc">
-                        {job.description.map((descriptionItem, j) => {
-                          return <li className="list-disc " key={j}>{descriptionItem}</li>;
-                        })}
-                      </ul>
-                      {/* <div className="w-full h-1 border-t border-t-zinc-950/20 my-2"></div> */}
+              <div className="divide-y divide-gray-200 md:divide-y-0">
+                {career.map((job, i) => {
+                  return (
+                    <div key={i} className={`${openCareerDescription == i ? "!border-l-zinc-900" : ""} transition-all duration-500 grid grid-cols-1 md:grid-cols-2 gap-4 pl-6 border-l`}>
+                      {/* Job title, position, company, dates etc */}
+                      <div className="mt-4 md:mt-0" onClick={() => { setOpenCareerDescription(openCareerDescription == i ? -1 : i) }}>
+                        <div className={`absolute -ml-[29px] bg-white h-auto w-auto overflow-visible -mb-full
+                                        ${openCareerDescription == i ? "text-zinc-900" : "text-gray-300"} transition-all duration-500`}>o</div>
+                        <div className="font-bold">{job.position}</div>
+                        <div className="italic">{job.company}</div>
+                      </div>
+
+                      {/* Description */}
+                      <div className={`${openCareerDescription == i ? "max-h-96 opacity-100" : "max-h-0 opacity-0"} transition-all duration-500 ease-in-out overflow-y-hidden pl-4 md:max-h-96 md:opacity-100 md:mb-12`}>
+                        <ul className="text-zinc-500 list-disc">
+                          {job.description.map((descriptionItem, j) => {
+                            return <li className="list-disc mb-4" key={j}>{descriptionItem}</li>;
+                          })}
+                        </ul>
+                        {/* <div className="w-full h-1 border-t border-t-zinc-950/20 my-2"></div> */}
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+
             </div>
 
             <div className="text-white p-12 text-center">{"Made with <3 by @Kanos999"}</div>
