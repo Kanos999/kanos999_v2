@@ -2,25 +2,18 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Kane Jackson",
+  title: "Iridium Comm Windows",
   description: "Programmer, Engineer, space & AI enthusiast. Welcome to my little corner of the internet <3",
   keywords: [
-    "computer science",
-    "mechatronics",
-    "mechanical",
-    "software",
-    "engineer",
-    "node",
+    "Iridium",
+    "Satellite",
+    "Tracking",
     "ANT61",
-    "InnerSteps",
-    "python",
-    "javascript",
-    "react",
-    "machine learning",
-    "data science"
+    "Kane Jackson",
+    "Mikhail Asavkin"
   ],
   image:
-    "https://media.licdn.com/dms/image/v2/D5603AQH0VL5n3_wESg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1706141727108?e=1742428800&v=beta&t=jIHjJrpF9nVeiPHTEHbHcx_YTHFuXotx4WJYUKrHWbk",
+    "https://media.licdn.com/dms/image/v2/C560BAQFSptSGoIk7IA/company-logo_200_200/company-logo_200_200/0/1630469893126?e=2147483647&v=beta&t=wiocHH6WrB7ZGHRMdBDxH08Fw2BquiWgvMopW3TiKEg",
   dateCreated: "2024-01-11T11:35:00+07:00",
   datePublished: "2024-01-11T11:35:00+07:00",
   dateModified: "2024-01-11T11:35:00+07:00",
