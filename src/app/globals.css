@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -47,4 +48,25 @@ body {
     font-display: swap;
     src: url(/fonts/Geologica-Regular.ttf) format('ttf');
   }
+}
+
+
+.background-gradient {
+  background: rgb(4,4,10);
+  background: linear-gradient(90deg, #19212b 0%, #202a36 50%, #19212b 100%); 
+  /* 171923 0c0c0c */
+}
+
+.background-gradient-dark {
+  background: rgb(4,4,10);
+  background: linear-gradient(0deg, #101c2b 0%, #0f0f0f 100%);
+}
+
+.background-gradient-blue {
+  background: rgb(4,4,10);
+  background: linear-gradient(90deg, rgba(4,4,10,1) 0%, rgb(13, 14, 22) 50%, rgba(4,4,10,1) 100%);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }

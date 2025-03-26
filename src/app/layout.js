@@ -1,7 +1,6 @@
 
 import "./globals.css";
 
-
 export const metadata = {
   title: "Kane Jackson",
   description: "Programmer, Engineer, space & AI enthusiast. Welcome to my little corner of the internet <3",
@@ -54,10 +53,14 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children, params }) {
+  const {team} = await params
+  console.log(team, params)
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+      </body>
     </html>
   );
 }
