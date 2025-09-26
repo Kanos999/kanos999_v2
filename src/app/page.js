@@ -65,82 +65,17 @@ export default function Home() {
   
   return (
     <main className="flex min-h-screen flex-col justify-between">
-      <div className="w-full h-full overflow-hidden">
-        <div className={courier.className}>
+      <div className="w-full h-[100vh] bg-white p-2 flex flex-row">
+        <div className={`w-1/2 h-full rounded-3xl overflow-hidden ${courier.className}`}>
           <Background perlin={perlin} currentSection={currentSection} setCurrentSection={setCurrentSection} />
         </div>
-
-        <div className={`${poppins.className} absolute top-0 flex flex-col justify-center max-w-4xl left-0 right-0 mx-auto`}>
-          <div className=" w-full md:top-12">
-
-            {/* border-sky-500/10 bg-sky-900/20 */}
-            <div className="rounded-md px-12 mt-48 mb-6  w-full text-white"> 
-              {/* <div className="rounded-full bg-gray-700 aspect-square h-6 my-4 left-0 right-0 mx-auto"></div>
-              <div className="w-full h-12 bg-gray-300"></div> */}
-              <div className={`${cedarville.className} text-md  italic text-white/80`}>Hi! My name is</div>
-              <div className={poppinsBold.className}><div className="text-4xl">Kane Jackson</div></div>
-              <div className="text-md mt-4">Mechatronics / Computer Science</div>
-            </div>
-
-            <div className="bg-white w-full p-12 rounded-tr-3xl rounded-bl-3xl md:rounded-3xl text-zinc-950/80 relative z-30">
-              {/* Links */}
-              <div className="flex flex-row mb-10">
-                <a href="https://www.linkedin.com/in/kanehjackson/">
-                  <img src="linkedin.png" className="opacity-50 mr-6 h-8" alt="Kane Jackson on LinkedIn" />
-                </a>
-                <a href="https://github.com/Kanos999">
-                  <img src="github.png" className="opacity-50 mr-4 h-10 -mt-1" alt="Kane Jackson on GitHub" />
-                </a>
-                <a href="https://www.instagram.com/kane.json/">
-                  <img src="instagram.png" className="opacity-30 mr-6 h-12 -mt-2" alt="Kane Jackson on Instagram" />
-                </a>
-              </div>
-
-              <div className={`${poppinsBold.className} text-2xl mb-8 font-bold`}>About me</div>
-              <div className="text-justify">
-                Passionate about leveraging software development and robotics to drive innovation in the space industry. 
-                My journey as a coder and problem-solver has been fueled by a fascination with the limitless possibilities 
-                of technology and a deep admiration for the extraordinary accomplishments of the aerospace sector &#128640;
-              </div>
-              
-              <div className="w-full h-1 border-t border-t-zinc-950/20 my-8 md:my-12"></div>
-
-              <div className={`${poppinsBold.className} text-2xl mb-6 md:mb-8 font-bold`}>Career</div>
-
-              <div className="divide-y divide-gray-200 md:divide-y-0">
-                {career.map((job, i) => {
-                  return (
-                    <div key={i} className={`${openCareerDescription == i ? "!border-l-zinc-900" : ""} transition-all duration-500 grid grid-cols-1 md:grid-cols-2 gap-4 pl-6 border-l`}>
-                      {/* Job title, position, company, dates etc */}
-                      <div className="mt-4 md:mt-0" onClick={() => { setOpenCareerDescription(openCareerDescription == i ? -1 : i) }}>
-                        <div className={`absolute -ml-[29px] bg-white h-auto w-auto overflow-visible -mb-full
-                                        ${openCareerDescription == i ? "text-zinc-900" : "text-gray-300"} transition-all duration-500`}>o</div>
-                        <div className="font-bold">{job.position}</div>
-                        <div className="italic">{job.company}</div>
-                      </div>
-
-                      {/* Description */}
-                      <div className={`${openCareerDescription == i ? "max-h-96 opacity-100" : "max-h-0 opacity-0"} transition-all duration-500 ease-in-out overflow-y-hidden pl-4 md:max-h-96 md:opacity-100 md:mb-12`}>
-                        <ul className="text-zinc-500 list-disc">
-                          {job.description.map((descriptionItem, j) => {
-                            return <li className="list-disc mb-4" key={j}>{descriptionItem}</li>;
-                          })}
-                        </ul>
-                        {/* <div className="w-full h-1 border-t border-t-zinc-950/20 my-2"></div> */}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-            </div>
-
-            <div className="text-white p-12 text-center">{"Made with <3 by @Kanos999"}</div>
-
-          </div>
-          
+        <div className="w-1/2 h-full px-8 flex flex-col text-black justify-end">
+          <div className="text-2xl mb-4" style={courier.style}>Minimalism</div>
+          <div className="text-md mb-8" style={poppins.style}>/ˈmɪnɪməlɪz(ə)m/</div>
         </div>
       </div>
+
+        
     </main>
   );
 }
@@ -210,9 +145,9 @@ const Background = ({ perlin, currentSection, setCurrentSection }) => {
   }, 1000 / fps);
     
   return (
-    <main ref={outer} className="flex min-h-screen flex-col justify-between overflow-x-hidden">
-      <div className="fixed h-full w-full z-10"></div>
-      <div ref={inner} className=" fixed self-start h-auto w-auto bg-zinc-950 text-slate-900 text-nowrap leading-4 select-none">
+    <main ref={outer} className="flex min-h-screen flex-col justify-between overflow-hidden">
+      <div className="h-full w-full z-10"></div>
+      <div ref={inner} className="self-start h-auto w-auto bg-black text-slate-800 text-nowrap leading-4 select-none">
         {backgroundCharacters.split("\n").map((i,key) => {
           return <div key={key}>{i}</div>;
         })}
@@ -221,17 +156,17 @@ const Background = ({ perlin, currentSection, setCurrentSection }) => {
       {/* Manually plice text into background ocean */}
       {/* <div
         onClick={() => {setCurrentSection("About me")}}
-        className={`z-40 -mt-1 top-[22rem] ml-72 p-0 m-0 fixed bg-zinc-950 text-slate-400 h-auto w-auto transition-all duration-150 cursor-pointer hover:text-slate-100`}>
+        className={`z-40 -mt-1 top-[22rem] ml-72 p-0 m-0 bg-zinc-950 text-slate-400 h-auto w-auto transition-all duration-150 cursor-pointer hover:text-slate-100`}>
         {currentSection === "About me" ? "-- " : ""} About me
       </div>
       <div 
         onClick={() => {setCurrentSection("Projects")}}
-        className={`z-40 -mt-1 top-[25rem] ml-72 p-0 m-0 fixed bg-zinc-950 text-slate-400 h-auto w-auto transition-all duration-150 cursor-pointer hover:text-slate-100`}>
+        className={`z-40 -mt-1 top-[25rem] ml-72 p-0 m-0 bg-zinc-950 text-slate-400 h-auto w-auto transition-all duration-150 cursor-pointer hover:text-slate-100`}>
         {currentSection === "Projects" ? "-- " : ""} Projects
       </div>
       <div 
         onClick={() => {setCurrentSection("Career")}}
-        className={`z-40 -mt-1 top-[28rem] ml-72 p-0 m-0 fixed bg-zinc-950 text-slate-400 h-auto w-auto transition-all duration-150 cursor-pointer hover:text-slate-100`}>
+        className={`z-40 -mt-1 top-[28rem] ml-72 p-0 m-0 bg-zinc-950 text-slate-400 h-auto w-auto transition-all duration-150 cursor-pointer hover:text-slate-100`}>
         {currentSection === "Career" ? "-- " : ""} Career
       </div> */}
     </main>
