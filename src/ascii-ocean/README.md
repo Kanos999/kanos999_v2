@@ -1,13 +1,13 @@
 # ascii-ocean
 
-Animated ASCII water caustics for React/Next.js projects. The `Background` component now measures its container, feeds those dimensions into a 3D simplex-noise field, and keeps a continuous ASCII flow in sync with `requestAnimationFrame`-friendly intervals so the ocean feels alive without sacrificing performance.
+Animated ASCII water caustics for React/Next.js projects. The `Background` component now measures its container, feeds those dimensions into a 3D simplex-noise field, and keeps a continuous ASCII flow in sync with `requestAnimationFrame`-friendly intervals so the ocean feels alive without sacrificing performance. All default styling (including the monospace font stack) ships inline, so you no longer need Tailwind or custom CSS utilities to get the intended look.
 
 ## Features
 - Adaptive grid sizing that matches whatever container you drop it into
 - Procedural animation driven by a persistent 3D simplex-noise generator
 - Lightweight interval updates via a built-in `useInterval` hook
 - Configurable glyph palette, FPS, and resolution through props
-- Pure client component with no CSS dependencies beyond optional utility classes
+- Pure client component with bundled inline styles (override via props when needed)
 
 ## Installation
 ```bash
@@ -63,13 +63,17 @@ export default function Hero() {
 | `fps` | `number` | `30` | Target frames per second for noise updates. |
 | `resolution` | `number` | `80` | Higher numbers create smoother waves; lower numbers exaggerate noise. |
 | `chars` | `string` | `"..//{#(;%)!};..:''"` | Glyph palette sampled according to noise intensity. |
-| `className` | `string` | `''` | Extra classes applied to the wrapper to tweak typography/colors. |
+| `className` | `string` | `''` | Optional wrapper classes for framework-specific styling. |
+| `style` | `React.CSSProperties` | `{}` | Merges with the wrapper’s inline styles (background, font stack, layout). |
+| `textStyle` | `React.CSSProperties` | `{}` | Merges with the ASCII grid styles (font sizing, spacing, color). |
+| `overlayStyle` | `React.CSSProperties` | `{}` | Customize the built-in grain overlay or disable it entirely. |
+| `showOverlay` | `boolean` | `true` | Toggle the noise/grain overlay without touching styles. |
 
 ## Customization
 - **Character palette:** supply a custom `chars` prop or edit the default string for different textures.
 - **Grid density:** change `resolution` to control how quickly values change between cells.
 - **Tempo:** modify `fps` to speed up or slow down the wave motion.
-- **Styling:** pass `className` or wrap the component to layer gradients, blend modes, or noise overlays.
+- **Styling:** use `style`, `textStyle`, or `overlayStyle` to fine-tune layout, typography, and the grain layer (or disable it with `showOverlay={false}`).
 
 Because the component renders simple `<div>` rows, you can wrap it with any container and layer additional UI above it using absolute positioning or CSS grids.
 
