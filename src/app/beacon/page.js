@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import { createNoise3D } from 'simplex-noise';
 import { Courier_Prime, Poppins, Homemade_Apple } from "next/font/google";
-import { useInterval } from '../util/useInterval'
+import { useInterval } from '../../util/useInterval'
 import alea from 'alea';
 
 //👇 Configure our font object
@@ -29,34 +29,6 @@ const cedarville = Homemade_Apple({
   display: 'swap',
 })
 
-const career = [
-  {
-    position: "Mechanical Engineering Intern",
-    company: "ANT61",
-    description: [
-      "Designed mechanical fixtures for validating our product in a vibration test, qualifying it for space flight.",
-      "Facilitated thermal cycling tests (vacuum and in-air) in accordance with SpaceX qualification standards.",
-      "Analytically verified designs of product enclosures and its overall mechanical integrity."
-    ]
-  },
-  {
-    position: "Lead Software Engineer",
-    company: "InnerSteps",
-    description: [
-      "Coordinated with a team of skilled engineers to deliver a high-quality, child-friendly mobile app.",
-      "Produced an MVP in a few months, leading to a user base growth of over 700.",
-      "Implemented agile methodologies to ensure efficient project delivery and meet tight deadlines."
-    ]
-  },
-  {
-    position: "Software Engineer",
-    company: "Gaming Entertainment Systems",
-    description: [
-      "Implemented engaging visual displays using HTML, CSS and JavaScript.",
-      "Designed printable CAD models to enhance product presentations for potential clients."
-    ]
-  }
-];
 
 export default function Home() {
   const perlin = createNoise3D();
@@ -147,7 +119,7 @@ const Background = ({ perlin, currentSection, setCurrentSection }) => {
   return (
     <main ref={outer} className="flex min-h-screen flex-col justify-between overflow-hidden">
       <div className="h-full w-full z-10 grain opacity-40 absolute"></div>
-      <div ref={inner} className=" self-start h-auto w-auto bg-black text-slate-800 text-nowrap leading-4 select-none">
+      <div ref={inner} className=" self-start h-auto w-auto bg-orange-600 text-orange-400 text-nowrap leading-4 select-none">
         {backgroundCharacters.split("\n").map((i,key) => {
           return <div key={key}>{i}</div>;
         })}
