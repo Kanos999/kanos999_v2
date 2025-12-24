@@ -1,6 +1,6 @@
 {
   "name": "ascii-ocean",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simply-to-use UI component that generates an animated background of ascii characters",
   "keywords": [
     "UI",
@@ -13,5 +13,8 @@
   "main": "Background.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "simplex-noise": "^4.0.3"
   }
 }
