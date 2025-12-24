@@ -1,0 +1,17 @@
+{
+  "name": "ascii-ocean",
+  "version": "1.1.0",
+  "description": "A simply-to-use UI component that generates an animated background of ascii characters",
+  "keywords": [
+    "UI",
+    "animation",
+    "react"
+  ],
+  "license": "ISC",
+  "author": "Kane Jackson",
+  "type": "commonjs",
+  "main": "Background.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

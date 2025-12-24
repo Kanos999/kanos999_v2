@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import { createNoise3D } from 'simplex-noise';
 import { Courier_Prime, Poppins, Homemade_Apple } from "next/font/google";
-import { useInterval } from '../util/useInterval'
+import { useInterval } from '../ascii-ocean/useInterval'
 import alea from 'alea';
 
 //👇 Configure our font object
