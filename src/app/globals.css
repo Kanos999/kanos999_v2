@@ -48,3 +48,12 @@ body {
     src: url(/fonts/Geologica-Regular.ttf) format('ttf');
   }
 }
+
+.heroShadow {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  background: #09090bd0;
+  opacity: 0.99;
+  -webkit-filter: blur(80px);
+}
