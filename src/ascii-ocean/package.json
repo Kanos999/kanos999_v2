@@ -9,7 +9,7 @@
   ],
   "license": "ISC",
   "author": "Kane Jackson",
-  "type": "commonjs",
+  "type": "module",
   "main": "dist/Background.js",
   "types": "Background.d.ts",
   "scripts": {
