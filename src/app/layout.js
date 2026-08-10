@@ -1,58 +1,120 @@
-
+import { Figtree, Instrument_Serif, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import { JsonLd, SITE_URL, personSchema, websiteSchema } from "@/lib/schema";
+
+/* Type system
+ * sans   Figtree, geometric with rounded terminals. Body and headings.
+ * serif  Instrument Serif, high contrast editorial. Display accents only.
+ * mono   IBM Plex Mono, the annotation layer: part numbers, field labels.
+ */
+const figtree = Figtree({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sans",
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-serif",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+  variable: "--font-mono",
+});
+
+const title = "Kane Jackson | Space, Robotics and Mechatronics Engineer";
+const description =
+  "Kane Jackson is a space industry engineer in Sydney. Mission Software Lead at ANT61, working on spacecraft ground software, robotics and AI, with a mechatronics background covering mechanical design and flight hardware qualification.";
 
 export const metadata = {
-  title: "Iridium Comm Windows",
-  description: "Programmer, Engineer, space & AI enthusiast. Welcome to my little corner of the internet <3",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: title,
+    template: "%s | Kane Jackson",
+  },
+  description,
+  applicationName: "Kane Jackson",
+  authors: [{ name: "Kane Jackson", url: SITE_URL }],
+  creator: "Kane Jackson",
+  publisher: "Kane Jackson",
+  category: "technology",
   keywords: [
-    "Iridium",
-    "Satellite",
-    "Tracking",
-    "ANT61",
     "Kane Jackson",
-    "Mikhail Asavkin"
+    "Kane Jackson engineer",
+    "Kane Jackson Sydney",
+    "mechatronics engineer Sydney",
+    "space software engineer",
+    "spacecraft ground software",
+    "mission software",
+    "robotics engineer",
+    "ANT61",
+    "UNSW mechatronics",
+    "cycloidal drive",
+    "graph neural networks",
+    "computer vision",
   ],
-  image:
-    "https://media.licdn.com/dms/image/v2/C560BAQFSptSGoIk7IA/company-logo_200_200/company-logo_200_200/0/1630469893126?e=2147483647&v=beta&t=wiocHH6WrB7ZGHRMdBDxH08Fw2BquiWgvMopW3TiKEg",
-  dateCreated: "2024-01-11T11:35:00+07:00",
-  datePublished: "2024-01-11T11:35:00+07:00",
-  dateModified: "2024-01-11T11:35:00+07:00",
-  author: {
-    "@type": "Person",
-    name: "Kane Jackson",
-    url: "https://www.linkedin.com/in/kanehjackson"
-  },
-  publisher: {
-    "@type": "Person",
-    name: "Kane Jackson",
-    logo: {
-      "@type": "ImageObject",
-      url: "https://media.licdn.com/dms/image/v2/D5603AQH0VL5n3_wESg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1706141727108?e=1742428800&v=beta&t=jIHjJrpF9nVeiPHTEHbHcx_YTHFuXotx4WJYUKrHWbk"
-    }
-  },
-  isFamilyFriendly: "true",
+  alternates: { canonical: "/" },
   openGraph: {
+    title,
+    description,
+    url: SITE_URL,
     siteName: "Kane Jackson",
-    type: "website",
-    locale: "en_AU"
+    type: "profile",
+    locale: "en_AU",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "Kane Jackson, space, robotics and mechatronics engineer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/og.png"],
   },
   robots: {
     index: true,
     follow: true,
-    "max-image-preview": "large",
-    "max-snippet": -1,
-    "max-video-preview": -1,
-    googleBot: "index, follow"
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 
-export default async function RootLayout({ children, params }) {
-  const {team} = await params
-  console.log(team, params)
+export const viewport = {
+  themeColor: "#ffffff",
+  colorScheme: "light",
+};
+
+export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
-        {children}
+    <html
+      lang="en-AU"
+      className={`${figtree.variable} ${instrumentSerif.variable} ${plexMono.variable}`}
+    >
+      <body className="relative bg-paper font-sans text-ink antialiased">
+        <JsonLd schemas={[personSchema(), websiteSchema()]} />
+        {/* The sheet: graph rule behind the hero, scrolling with the page and
+            fading out before the first section of body copy. */}
+        <div
+          aria-hidden
+          className="sheet-grid pointer-events-none absolute inset-x-0 top-0 z-0 h-[170vh] max-h-full md:h-[115vh]"
+        />
+        <div className="relative z-10">{children}</div>
       </body>
     </html>
   );

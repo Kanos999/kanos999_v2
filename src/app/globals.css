@@ -1,72 +1,199 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
+/*
+ * kanejackson.com — drawing sheet
+ * A white, paper-like ground with a faint graph rule beneath everything.
+ * Colours are stored as raw RGB triplets so Tailwind can apply opacity
+ * modifiers to them (see tailwind.config.js).
+ */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  color-scheme: light;
+
+  --paper-rgb: 255 255 255;
+  --paper-2-rgb: 250 250 249;   /* warm off-white for alternating bands */
+  --ink-rgb: 15 18 20;          /* near-black, the drawn line */
+  --accent-rgb: 31 92 139;      /* drafting blue, used sparingly */
+  --rule-rgb: 18 22 28;         /* base for all hairlines, always used at low alpha */
+
+  /* Sheet grid.
+   * The grid is a ground for the hero, not wallpaper for the whole page —
+   * body copy needs clean paper under it. Raise --grid-*-alpha to strengthen,
+   * or drop the mask on .sheet-grid to run it the full length of the page. */
+  --grid-minor: 32px;
+  --grid-major: 128px;
+  --grid-minor-alpha: 0.022;
+  --grid-major-alpha: 0.042;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
-html { scroll-behavior: smooth; } 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: rgb(var(--paper-rgb));
+  color: rgb(var(--ink-rgb));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern" 1;
 }
 
-.geologica {
-  font-family: "Geologica", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings:
-    "slnt" 0,
-    "CRSV" 0,
-    "SHRP" 0;
+::selection {
+  background: rgb(var(--accent-rgb) / 0.14);
+  color: rgb(var(--ink-rgb));
 }
 
-@layer base {
-  @font-face {
-    font-family: 'Geologica';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(/fonts/Geologica-Regular.ttf) format('ttf');
+/* Focus ring that matches the drafting language */
+:where(a, button, input, [tabindex]):focus-visible {
+  outline: 1px solid rgb(var(--accent-rgb) / 0.7);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+@layer components {
+  /* ---------------------------------------------------------------
+   * The sheet: a fixed graph-paper ground sitting behind all content.
+   * Minor rule every 24px, major rule every 96px, both barely there.
+   * --------------------------------------------------------------- */
+  .sheet-grid {
+    background-image:
+      linear-gradient(to right, rgb(var(--rule-rgb) / var(--grid-major-alpha)) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--rule-rgb) / var(--grid-major-alpha)) 1px, transparent 1px),
+      linear-gradient(to right, rgb(var(--rule-rgb) / var(--grid-minor-alpha)) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--rule-rgb) / var(--grid-minor-alpha)) 1px, transparent 1px);
+    background-size:
+      var(--grid-major) var(--grid-major),
+      var(--grid-major) var(--grid-major),
+      var(--grid-minor) var(--grid-minor),
+      var(--grid-minor) var(--grid-minor);
+    background-position: -1px -1px;
+
+    /* Hold at full strength through the hero, then fall away so no section of
+     * body copy is ever read against ruled lines. */
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%);
+  }
+
+  /* Mono metadata label — part numbers, field names, annotations */
+  .label {
+    font-family: theme('fontFamily.mono');
+    font-size: 0.6875rem;   /* 11px */
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* Hairline in the drawing's own weight */
+  .rule-t { border-top: 1px solid rgb(var(--rule-rgb) / 0.12); }
+  .rule-b { border-bottom: 1px solid rgb(var(--rule-rgb) / 0.12); }
+  .rule-l { border-left: 1px solid rgb(var(--rule-rgb) / 0.12); }
+  .rule-r { border-right: 1px solid rgb(var(--rule-rgb) / 0.12); }
+
+  /* Underline that draws in from the left on hover */
+  .link-draw {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 320ms cubic-bezier(0.22, 1, 0.36, 1), color 200ms ease;
+    padding-bottom: 1px;
+  }
+  .link-draw:hover,
+  .link-draw:focus-visible {
+    background-size: 100% 1px;
   }
 }
 
+@layer utilities {
+  /* Scroll-reveal: opacity + a short lift. Driven by IntersectionObserver. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .reveal[data-revealed='true'] {
+    opacity: 1;
+    transform: none;
+  }
 
-.background-gradient {
-  background: rgb(4,4,10);
-  background: linear-gradient(90deg, #19212b 0%, #202a36 50%, #19212b 100%); 
-  /* 171923 0c0c0c */
+  /* Self-drawing SVG strokes for the projection plate.
+   * Every drawn element carries pathLength="1", so one dash length works
+   * regardless of the geometry's real length. */
+  .draw-in {
+    stroke-dasharray: var(--len, 1);
+    stroke-dashoffset: var(--len, 1);
+    animation: draw-stroke 1400ms cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    animation-delay: var(--draw-delay, 0ms);
+  }
+  .fade-in {
+    opacity: 0;
+    animation: fade-up 800ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--draw-delay, 0ms);
+  }
 }
 
-.background-gradient-dark {
-  background: rgb(4,4,10);
-  background: linear-gradient(0deg, #101c2b 0%, #0f0f0f 100%);
+/* ── Cycloidal drive kinematics ─────────────────────────────────────────
+ * Three rates, all derived from the drive's own ratio in CycloidalPlate.js:
+ *   input eccentric  →  +ω          (period T)
+ *   disc             →  carried round at +ω by the eccentric while spinning
+ *                       at −ωN/(N−1) about its own centre, netting −ω/(N−1)
+ *   output flange    →  −ω/(N−1)    (period T·(N−1), reversed)
+ * The nesting does the work: the outer group orbits, the inner one spins.
+ */
+.kin {
+  transform-box: view-box;
+  animation-duration: var(--dur, 12s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-delay: var(--kin-delay, 1800ms);
+}
+.kin-cw { animation-name: kin-cw; }
+.kin-ccw { animation-name: kin-ccw; }
+
+@keyframes kin-cw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes kin-ccw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
 }
 
-.background-gradient-blue {
-  background: rgb(4,4,10);
-  background: linear-gradient(90deg, rgba(4,4,10,1) 0%, rgb(13, 14, 22) 50%, rgba(4,4,10,1) 100%);
+@keyframes draw-stroke {
+  to { stroke-dashoffset: 0; }
 }
 
-.material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+@keyframes fade-up {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .draw-in {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+  .fade-in {
+    opacity: 1;
+    animation: none;
+  }
+  /* The drive holds still at its assembled position. */
+  .kin {
+    animation: none;
+  }
 }

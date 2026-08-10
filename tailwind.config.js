@@ -7,20 +7,42 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))"
+      colors: {
+        paper: {
+          DEFAULT: "rgb(var(--paper-rgb) / <alpha-value>)",
+          2: "rgb(var(--paper-2-rgb) / <alpha-value>)",
+        },
+        ink: "rgb(var(--ink-rgb) / <alpha-value>)",
+        accent: "rgb(var(--accent-rgb) / <alpha-value>)",
+        rule: "rgb(var(--rule-rgb) / <alpha-value>)",
       },
       fontFamily: {
-        mono: ['Geologica'],
+        sans: [
+          "var(--font-sans)",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "sans-serif",
+        ],
+        serif: ["var(--font-serif)", "Iowan Old Style", "Georgia", "serif"],
+        mono: [
+          "var(--font-mono)",
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "monospace",
+        ],
       },
-      colors: {
-        "ant-yellow": "rgb(255, 204, 51)",
-        "ant-navy": "#2e2f41",
-        "ant-gray": "#3c3c3c",
-        "ant-orange": "#be6e46"
-      }
+      letterSpacing: {
+        tightest: "-0.045em",
+      },
+      maxWidth: {
+        sheet: "78rem",
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+      },
     },
   },
   plugins: [],
