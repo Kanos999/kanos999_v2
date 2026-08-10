@@ -1,73 +1,50 @@
 'use client'
 
-import { useEffect, useRef, useState, useLayoutEffect } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { createNoise3D } from 'simplex-noise';
-import { Courier_Prime, Poppins, Homemade_Apple } from "next/font/google";
+import { Courier_Prime } from "next/font/google";
+import Link from 'next/link';
 import { useInterval } from '../util/useInterval'
-import alea from 'alea';
 
-//👇 Configure our font object
+// The ASCII ocean needs a fixed-width face so the character grid stays square.
 const courier = Courier_Prime({
   subsets: ['latin'],
   weight: '400',
   display: 'swap',
 })
 
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-})
-const poppinsBold = Poppins({
-  subsets: ['latin'],
-  weight: '600',
-  display: 'swap',
-})
-const cedarville = Homemade_Apple({
-  subsets: ['latin'],
-  weight: '400',
-  display: 'swap',
-})
+export default function NotFound() {
+  const perlin = useMemo(() => createNoise3D(), []);
 
-const career = [
-  {
-    position: "Mechanical Engineering Intern",
-    company: "ANT61",
-    description: "• Designed mechanical fixtures for validating our product in a vibration test, qualifying it for space flight. \n\
-                  • Facilitated thermal cycling tests (both in vacuum and in-air) on the same product in accordance with SpaceX qualification standards. \n\
-                  • Analytically verified designs of product enclosures and its overall mechanical integrity.\n"
-  },
-  {
-    position: "Lead Software Engineer",
-    company: "InnerSteps",
-    description: "• Coordinated with a team of skilled engineers to deliver a high-quality, child-friendly mobile app for InnerSteps. \n\
-                  • Produced an MVP in a few months, leading to a user base growth of over 700. \n\
-                  • Implemented agile methodologies to ensure efficient project delivery and meet tight deadlines.\n"
-  },
-  {
-    position: "Software Engineer",
-    company: "Gaming Entertainment Systems",
-    description: "• Implemented engaging visual displays using HTML, CSS and JavaScript. \n\
-                  • Designed printable CAD models to enhance product presentations for potential clients.\n"
-  }
-];
-
-export default function Home() {
-  const perlin = createNoise3D();
-  const [currentSection, setCurrentSection] = useState("About me");
-  const [openCareerDescription, setOpenCareerDescription] = useState(-1);
-  
   return (
     <main className="flex min-h-screen flex-col justify-between">
       <div className="w-full h-full overflow-hidden">
         <div className={courier.className}>
-          <Background perlin={perlin} currentSection={currentSection} setCurrentSection={setCurrentSection} />
+          <Background perlin={perlin} />
         </div>
       </div>
 
-      <div className="z-40 text-white font-bold text-center absolute h-full w-full flex flex-col justify-center">
-        <div className="text-2xl">Umm... this is awkward</div>
-        <div className="text-xl text-zinc-500">404 Not Found</div>
+      <div className="z-40 absolute h-full w-full flex flex-col items-center justify-center px-6 text-center">
+        <div className="label text-white/40">Error 404 / Sheet not found</div>
+        <div className="mt-6 font-serif text-4xl italic text-white md:text-5xl">
+          Umm... this is awkward.
+        </div>
+        <div className="mt-4 max-w-md text-[15px] leading-relaxed text-zinc-400">
+          Nothing is filed at this address. The ocean behind this text is generated
+          character by character. It used to be the whole site.
+        </div>
+        <Link
+          href="/"
+          className="group mt-10 inline-flex items-center gap-3 border border-white/20 px-6 py-3 text-[13px] font-medium text-white/80 transition-colors hover:border-white/50 hover:text-white"
+        >
+          <span
+            aria-hidden
+            className="transition-transform duration-300 group-hover:-translate-x-1"
+          >
+            ←
+          </span>
+          Return to index
+        </Link>
       </div>
     </main>
   );
@@ -75,7 +52,7 @@ export default function Home() {
 
 
 
-const Background = ({ perlin, currentSection, setCurrentSection }) => {
+const Background = ({ perlin }) => {
   const inner = useRef(null);
   const outer = useRef(null);
   const [frame, setFrame] = useState(0);
@@ -145,23 +122,6 @@ const Background = ({ perlin, currentSection, setCurrentSection }) => {
           return <div key={key}>{i}</div>;
         })}
       </div>
-
-      {/* Manually plice text into background ocean */}
-      {/* <div
-        onClick={() => {setCurrentSection("About me")}}
-        className={`z-40 -mt-1 top-[22rem] ml-72 p-0 m-0 fixed bg-zinc-950 text-slate-400 h-auto w-auto transition-all duration-150 cursor-pointer hover:text-slate-100`}>
-        {currentSection === "About me" ? "-- " : ""} About me
-      </div>
-      <div 
-        onClick={() => {setCurrentSection("Projects")}}
-        className={`z-40 -mt-1 top-[25rem] ml-72 p-0 m-0 fixed bg-zinc-950 text-slate-400 h-auto w-auto transition-all duration-150 cursor-pointer hover:text-slate-100`}>
-        {currentSection === "Projects" ? "-- " : ""} Projects
-      </div>
-      <div 
-        onClick={() => {setCurrentSection("Career")}}
-        className={`z-40 -mt-1 top-[28rem] ml-72 p-0 m-0 fixed bg-zinc-950 text-slate-400 h-auto w-auto transition-all duration-150 cursor-pointer hover:text-slate-100`}>
-        {currentSection === "Career" ? "-- " : ""} Career
-      </div> */}
     </main>
   );
 }
