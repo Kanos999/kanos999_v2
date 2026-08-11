@@ -4,18 +4,19 @@
 
 /*
  * kanejackson.com — drawing sheet
- * A white, paper-like ground with a faint graph rule beneath everything.
+ * A dark, blueprint-like ground with a faint graph rule beneath everything.
  * Colours are stored as raw RGB triplets so Tailwind can apply opacity
- * modifiers to them (see tailwind.config.js).
+ * modifiers to them (see tailwind.config.js). These five tokens are the whole
+ * palette: everything else on the site resolves from them.
  */
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 
-  --paper-rgb: 255 255 255;
-  --paper-2-rgb: 250 250 249;   /* warm off-white for alternating bands */
-  --ink-rgb: 15 18 20;          /* near-black, the drawn line */
-  --accent-rgb: 31 92 139;      /* drafting blue, used sparingly */
-  --rule-rgb: 18 22 28;         /* base for all hairlines, always used at low alpha */
+  --paper-rgb: 12 15 19;        /* near-black, faintly cool */
+  --paper-2-rgb: 17 21 26;
+  --ink-rgb: 231 234 238;       /* soft white, avoids halation at large sizes */
+  --accent-rgb: 125 174 219;    /* drafting blue, brightened to hold on dark */
+  --rule-rgb: 186 203 224;      /* light tint, always used at low alpha */
 
   /* Sheet grid.
    * The grid is a ground for the hero, not wallpaper for the whole page —
@@ -23,9 +24,13 @@
    * or drop the mask on .sheet-grid to run it the full length of the page. */
   --grid-minor: 32px;
   --grid-major: 128px;
-  --grid-minor-alpha: 0.022;
-  --grid-major-alpha: 0.042;
+  /* Light lines on a dark ground have less contrast to work with than dark
+     lines on paper, so the grid needs a touch more alpha than the white
+     version used. */
+  --grid-minor-alpha: 0.03;
+  --grid-major-alpha: 0.055;
 }
+
 
 html {
   scroll-behavior: smooth;

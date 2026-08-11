@@ -25,17 +25,17 @@ export default function NotFound() {
       </div>
 
       <div className="z-40 absolute h-full w-full flex flex-col items-center justify-center px-6 text-center">
-        <div className="label text-white/40">Error 404 / Sheet not found</div>
-        <div className="mt-6 font-serif text-4xl italic text-white md:text-5xl">
+        <div className="label text-ink/40">Error 404 / Sheet not found</div>
+        <div className="mt-6 font-serif text-4xl italic text-ink md:text-5xl">
           Umm... this is awkward.
         </div>
-        <div className="mt-4 max-w-md text-[15px] leading-relaxed text-zinc-400">
+        <div className="mt-4 max-w-md text-[15px] leading-relaxed text-ink/60">
           Nothing is filed at this address. The ocean behind this text is generated
           character by character. It used to be the whole site.
         </div>
         <Link
           href="/"
-          className="group mt-10 inline-flex items-center gap-3 border border-white/20 px-6 py-3 text-[13px] font-medium text-white/80 transition-colors hover:border-white/50 hover:text-white"
+          className="group mt-10 inline-flex items-center gap-3 border border-rule/20 px-6 py-3 text-[13px] font-medium text-ink/80 transition-colors hover:border-rule/40 hover:text-ink"
         >
           <span
             aria-hidden
@@ -117,7 +117,7 @@ const Background = ({ perlin }) => {
   return (
     <main ref={outer} className="flex min-h-screen flex-col justify-between overflow-x-hidden">
       <div className="fixed h-full w-full z-10"></div>
-      <div ref={inner} className=" fixed self-start h-auto w-auto bg-zinc-950 text-slate-900 text-nowrap leading-4 select-none">
+      <div ref={inner} className=" fixed self-start h-auto w-auto bg-paper text-ink/[0.07] text-nowrap leading-4 select-none">
         {backgroundCharacters.split("\n").map((i,key) => {
           return <div key={key}>{i}</div>;
         })}

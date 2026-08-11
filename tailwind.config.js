@@ -37,6 +37,17 @@ module.exports = {
       letterSpacing: {
         tightest: "-0.045em",
       },
+      /*
+       * Tailwind's opacity scale runs in steps of 5, so `border-rule/12` never
+       * generated and every element using it silently fell back to preflight's
+       * default border colour (#e5e7eb, an opaque near-white). On a white page
+       * that passes for a normal hairline; on a dark one it glares. These two
+       * entries are the hairline weights the drawing language is built on.
+       */
+      opacity: {
+        8: "0.08",
+        12: "0.12",
+      },
       maxWidth: {
         sheet: "78rem",
       },
