@@ -325,7 +325,7 @@ export const projects = [
       src: "/media/cycloidal-drive-render.png",
       width: 577,
       height: 521,
-      frame: "4 / 3",
+      frame: "16 / 9",
       fit: "contain",
       // The render's own flat ground, so the frame reads as one surface.
       background: "#080c12",
