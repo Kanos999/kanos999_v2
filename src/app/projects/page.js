@@ -11,7 +11,7 @@ import { JsonLd, projectsSchema } from "@/lib/schema";
 export const metadata = {
   title: "Projects",
   description:
-    "Engineering projects by Kane Jackson: a dual disc cycloidal drive, a graph neural network for robotic health monitoring, proximity voice comms for motorcyclists, computer vision and full stack software.",
+    "Engineering projects by Kane Jackson: a vision aided rocket landing GNC stack, a graph neural network for robotic health monitoring, a dual disc cycloidal drive, proximity voice comms for motorcyclists, computer vision and full stack software.",
   alternates: { canonical: "/projects" },
   openGraph: {
     title: "Projects | Kane Jackson",
@@ -97,7 +97,7 @@ export default function Projects() {
         </section>
       </main>
 
-      <Footer sheet="2 of 2" title="Personal Site / Projects" />
+      <Footer sheet="2 of 3" title="Personal Site / Projects" />
     </>
   );
 }

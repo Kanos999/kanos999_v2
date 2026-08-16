@@ -13,7 +13,7 @@
 
 import { person, socials } from "@/data/site";
 import { allSkills } from "@/data/skills";
-import { projects } from "@/data/projects";
+import { projects, projectHref } from "@/data/projects";
 
 export const SITE_URL = "https://kanejackson.com";
 const PERSON_ID = `${SITE_URL}/#kane-jackson`;
@@ -108,16 +108,65 @@ export function projectsSchema() {
       itemListElement: projects.map((project, i) => ({
         "@type": "ListItem",
         position: i + 1,
-        item: {
-          "@type": "CreativeWork",
-          name: project.title,
-          description: project.summary,
-          creator: { "@id": PERSON_ID },
-          keywords: [...(project.stack || []), ...(project.disciplines || [])].join(", "),
-          ...(project.year ? { dateCreated: project.year } : {}),
-          ...(project.href && /^https?:\/\//.test(project.href) ? { url: project.href } : {}),
-        },
+        item: creativeWork(project),
       })),
+    },
+  };
+}
+
+/** One project as a CreativeWork. Shared by the index listing and its own page. */
+function creativeWork(project) {
+  const href = projectHref(project);
+  const image = project.media?.poster || project.detail?.figures?.[0]?.poster;
+
+  return {
+    "@type": "CreativeWork",
+    name: project.title,
+    description: project.summary,
+    creator: { "@id": PERSON_ID },
+    keywords: [...(project.stack || []), ...(project.disciplines || [])].join(", "),
+    ...(project.year ? { dateCreated: project.year } : {}),
+    ...(href ? { url: /^https?:\/\//.test(href) ? href : `${SITE_URL}${href}` } : {}),
+    ...(image ? { image: `${SITE_URL}${image}` } : {}),
+  };
+}
+
+/**
+ * A project's own page. The breadcrumb is the part that pays: it tells search
+ * engines these pages hang off /projects rather than floating loose.
+ */
+export function projectSchema(project) {
+  const url = `${SITE_URL}/projects/${project.slug}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${url}#page`,
+    url,
+    name: `${project.title}, ${person.name}`,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    about: { "@id": PERSON_ID },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: "Projects", item: `${SITE_URL}/projects` },
+        { "@type": "ListItem", position: 3, name: project.title, item: url },
+      ],
+    },
+    mainEntity: {
+      ...creativeWork(project),
+      "@id": `${url}#project`,
+      ...(project.detail?.documents?.length
+        ? {
+            associatedMedia: project.detail.documents.map((doc) => ({
+              "@type": "DigitalDocument",
+              name: doc.title,
+              url: `${SITE_URL}${doc.href}`,
+              encodingFormat: "application/pdf",
+            })),
+          }
+        : {}),
     },
   };
 }

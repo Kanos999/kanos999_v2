@@ -201,7 +201,7 @@ export default function Home() {
         </section>
       </main>
 
-      <Footer sheet="1 of 2" title="Personal Site / Index" />
+      <Footer sheet="1 of 3" title="Personal Site / Index" />
     </>
   );
 }
