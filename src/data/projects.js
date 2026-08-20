@@ -231,7 +231,8 @@ export const projects = [
     status: "Complete",
     href: "",
     media: {
-      src: "/media/gnn-inference.jpg",
+      src: "/media/gnn-inference.mp4",
+      poster: "/media/gnn-inference.jpg",
       width: 1440,
       height: 786,
       caption: "Live diagnosis in ROS 2: a fault called in on one joint, the network's answer beside it.",
@@ -343,6 +344,17 @@ export const projects = [
     stack: ["Python", "OpenCV"],
     status: "Archived",
     href: "",
+    media: {
+      src: "/media/pingpong-tracking.mp4",
+      poster: "/media/pingpong-tracking.jpg",
+      width: 1440,
+      height: 1080,
+      // Filmed off the screen, so the source is 4:3 with dead desk at the top
+      // and bottom; a 16/9 frame crops to the run and keeps the plate landscape.
+      frame: "16 / 9",
+      caption:
+        "The tracker running: an HSV mask locks a box onto the ball frame by frame, with the frame count and travel direction printed over the feed.",
+    },
   },
   {
     id: "PRJ-005",
