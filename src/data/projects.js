@@ -12,7 +12,8 @@
  *   summary     One or two sentences. This is the card body.
  *   note        Optional serif one liner, the editorial aside under the title.
  *   stack       Tools, languages, materials, processes.
- *   status      "Live" | "Complete" | "In progress" | "Archived" | "Case study soon"
+ *   status      "Live" | "Complete" | "In progress" | "Shelved" | "Archived" |
+ *               "Case study soon"
  *   href        Optional external link. Opens in a new tab automatically, and
  *               takes precedence over the project's own page when both exist.
  *   role        Optional, shown in structured data.
@@ -137,7 +138,7 @@ export const projects = [
       "A cross platform mobile app for real time proximity voice communication between motorcyclists, with open comms for nearby riders and private crew channels. I designed and built the whole thing: the app, the interface, the icon pipeline, and the product strategy around a cold start density problem.",
     note: "Proximity voice comms for motorcyclists.",
     stack: ["React Native", "TypeScript", "LiveKit", "Node.js"],
-    status: "In progress",
+    status: "Shelved",
     href: "",
     media: {
       src: "/media/convoii-render.jpg",
@@ -181,6 +182,15 @@ export const projects = [
           ],
         },
         {
+          heading: "The cold start problem",
+          body: [
+            "A proximity app is only worth opening if someone else is nearby, and on launch day nobody is. The matcher is tuned for a road that already has riders on it, so early on a rider can complete a whole ride, never be matched with anyone, conclude the app does nothing and stop opening it. That is a trap that closes on itself: thin density produces silent rides, silent rides cost retention, and the retention it costs is exactly what density needed in order to grow.",
+            "The answer is to stop treating the matching radius as a constant. What matters to a rider is not the number in metres, it is whether the ride produced anyone to talk to, so the radius becomes the free variable and the target becomes a set number of matches per rider per ride. Where riders are sparse the radius opens out until it reaches them; as a region fills in, the same target is met at shorter and shorter range, and the radius contracts on its own without anyone tuning it.",
+            "It contracts to a floor rather than to nothing. Past a certain distance a match stops being worth making, because riders who are not genuinely near each other cannot see each other and have no road in common to talk about. So the radius is clamped at the steady state value the matcher would have used all along, and a dense city converges down onto it while a quiet highway keeps the wider search. The endpoint is the design that was always wanted; the widening is scaffolding for surviving long enough to reach it.",
+            "The shipped matcher runs on the fixed 150 m and 300 m thresholds, which is the baseline a density term would have been measured against. Turning those two numbers into a function of local density was the next piece of backend work, and it is the part the project never reached.",
+          ],
+        },
+        {
           heading: "Voice",
           body: [
             "Voice started as a WebRTC mesh, which capped a channel at about four riders before every phone was uploading its microphone to everyone else. It now runs through an SFU: a proximity channel maps one to one onto a LiveKit room, so a rider uploads their microphone once no matter how many people are on the channel, and the media never touches the backend, which only mints a token scoped to that one room.",
@@ -202,6 +212,22 @@ export const projects = [
             "Alongside open comms there are crews: a private channel that only links riders who share the same crew, invited by a QR code or a link that deep links straight into joining. It is the same matcher underneath, with membership as one more condition on whether two riders are allowed to link at all.",
           ],
         },
+        {
+          heading: "The mark",
+          body: [
+            "The icon is the matcher, drawn. One filled dot for the rider holding the phone, one open dot for another rider in range, and a line between them for the link the matcher has just formed. It is the smallest true picture of the product: not a helmet, not a motorcycle, not a speech bubble, just the edge between two riders that every other decision in the app exists to make.",
+            "The name carries the same idea a second time. Convoii is convoy with the tail respelled, and the two i's set in orange are that pair of riders again, which is what lets the wordmark stand on its own without the icon beside it. At small sizes the pair reads as two bars, so it holds up as a home screen icon and as a badge on a notification.",
+            "There are two lockups. The dark one is the app's own ground, since a phone mounted on a bar in daylight runs dark; the light one is for everywhere the app is talked about rather than used.",
+          ],
+        },
+        {
+          heading: "Why it is shelved",
+          body: [
+            "Cardo reached the same ground first, and reached it from a much better position. They already make the intercom hardware sitting inside riders' helmets, so their users arrive wearing the device and grouped with the people they ride with. The problem this entire project was organised around is one an incumbent of that shape never has to solve: there is no cold start when the installed base is already on the road.",
+            "That is a market reason to stop rather than a technical one, which is the useful part to be clear about. The matcher works, the mesh to SFU migration held, and the native side does what it needs to on a moving bike. What the project could not get to was the density its whole design depends on, and the plan for reaching it, a radius that opens up while riders are thin and contracts as they are not, is a strategy for a market with room in it rather than one where the hardware vendor is already in the helmet.",
+            "It is left documented rather than deleted. The interesting work was never the voice plumbing, it was deciding who is in a conversation, continuously, from noisy GPS on moving vehicles, and that part is built and tested.",
+          ],
+        },
       ],
       figures: [
         {
@@ -213,6 +239,21 @@ export const projects = [
           maxWidth: 420,
           caption:
             "Open comms during a ride: riders in range placed around the live channel by distance, with the callsign, connection state and range of each one underneath.",
+        },
+        {
+          src: "/media/convoii-logos.png",
+          width: 846,
+          height: 658,
+          fit: "contain",
+          // The artwork's own ground, sampled off its edge, so the plate does
+          // not read as a lighter box sitting behind the marks.
+          background: "#0d0d0e",
+          // Held near its native width; upscaling a logo past its own pixels
+          // is the one thing a mark cannot survive.
+          maxWidth: 560,
+          alt: "Convoii app icon and wordmark, in dark and light lockups",
+          caption:
+            "The identity: the app icon carrying the link between two riders, the wordmark with its pair of riders in the tail, and the light lockup underneath.",
         },
       ],
     },

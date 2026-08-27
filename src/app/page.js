@@ -17,10 +17,12 @@ const about = {
     { name: "Focus", value: "Space systems, robotics, AI" },
     { name: "Study", value: `Mechatronic Eng. + Computer Science, ${person.university}` },
   ],
+  // The lede is the first prose a reader or a crawler meets, so it states the
+  // field and the city outright rather than leaving either to be inferred.
   lede:
-    "I'm a space industry engineer working on mission and ground software, with a mechatronics background that covers the hardware it runs on.",
+    "I'm a space industry software engineer in Sydney, working on mission and ground software, with a mechatronics background that covers the hardware it runs on.",
   body: [
-    "At ANT61 I lead the mission software team. That means owning project planning and delivery across the ground software stack, defining the system architecture, and taking integration level implementation and testing through to spaceflight operations. On the hardware side I've designed mechanical fixtures for flight hardware testing, run thermal vacuum and vibration campaigns to SpaceX qualification standards, and analysed the structural integrity of flight enclosures.",
+    "At ANT61, a Sydney space robotics company whose Beacon module gives satellites independent communications, diagnostics and recovery on orbit, I lead the mission software team. That means owning project planning and delivery across the ground software stack, defining the system architecture, and taking integration-level implementation and testing through to spaceflight operations. On the hardware side I've designed mechanical fixtures for flight hardware testing, run thermal vacuum and vibration campaigns to SpaceX qualification standards, and analysed the structural integrity of flight assemblies.",
     "The mechatronics background is why I can work on both. Knowing how a part is toleranced changes how I write the software that drives it, and knowing what the software needs changes how I draw the part. I'm finishing a double degree in Mechatronic Engineering and Computer Science at UNSW, and I want to keep building across that boundary in space and robotics.",
   ],
 };

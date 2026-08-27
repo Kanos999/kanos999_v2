@@ -1,6 +1,6 @@
 import { Figtree, Instrument_Serif, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import { JsonLd, SITE_URL, personSchema, websiteSchema } from "@/lib/schema";
+import { JsonLd, SITE_URL, identityGraph } from "@/lib/schema";
 
 /* Type system
  * sans   Figtree, geometric with rounded terminals. Body and headings.
@@ -28,15 +28,24 @@ const plexMono = IBM_Plex_Mono({
   variable: "--font-mono",
 });
 
-const title = "Kane Jackson | Space, Robotics and Mechatronics Engineer";
+/* Title and description carry the disambiguator.
+ *
+ * The name alone belongs to someone else with a far larger press footprint, so
+ * competing for it bare is not the goal. These are written for the qualified
+ * queries instead, the ones where intent is already specific: "Kane Jackson
+ * space engineer", "Kane Jackson ANT61", "Kane Jackson satellite". Every one of
+ * those terms appears here alongside the name, and Sydney is in both so the
+ * location never has to be inferred.
+ */
+const title = "Kane Jackson — Space Software Engineer, Sydney | ANT61";
 const description =
-  "Kane Jackson is a space industry engineer in Sydney. Mission Software Lead at ANT61, working on spacecraft ground software, robotics and AI, with a mechatronics background covering mechanical design and flight hardware qualification.";
+  "Kane Jackson is a space industry software engineer in Sydney, Australia. Mission Software Lead at ANT61, working on satellite and spacecraft ground software behind the ANT61 Beacon, with a mechatronics background covering robotics, mechanical design and flight hardware qualification. UNSW Mechatronic Engineering and Computer Science.";
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: title,
-    template: "%s | Kane Jackson",
+    template: "%s | Kane Jackson, Space Software Engineer",
   },
   description,
   applicationName: "Kane Jackson",
@@ -44,16 +53,24 @@ export const metadata = {
   creator: "Kane Jackson",
   publisher: "Kane Jackson",
   category: "technology",
+  // Qualified queries first. These are the ones worth owning outright.
   keywords: [
-    "Kane Jackson",
-    "Kane Jackson engineer",
+    "Kane Jackson space engineer",
+    "Kane Jackson ANT61",
+    "Kane Jackson satellite",
+    "Kane Jackson software engineer",
     "Kane Jackson Sydney",
+    "Kane Jackson UNSW",
+    "Kane H. Jackson",
+    "Kane Jackson",
+    "space software engineer Sydney",
     "mechatronics engineer Sydney",
-    "space software engineer",
     "spacecraft ground software",
+    "satellite telemetry software",
     "mission software",
     "robotics engineer",
     "ANT61",
+    "ANT61 Beacon",
     "UNSW mechatronics",
     "cycloidal drive",
     "graph neural networks",
@@ -72,7 +89,7 @@ export const metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Kane Jackson, space, robotics and mechatronics engineer",
+        alt: "Kane Jackson, space software engineer in Sydney and Mission Software Lead at ANT61",
       },
     ],
   },
@@ -108,7 +125,7 @@ export default function RootLayout({ children }) {
       className={`${figtree.variable} ${instrumentSerif.variable} ${plexMono.variable}`}
     >
       <body className="relative bg-paper font-sans text-ink antialiased">
-        <JsonLd schemas={[personSchema(), websiteSchema()]} />
+        <JsonLd schemas={identityGraph()} />
         {/* The sheet: graph rule behind the hero, scrolling with the page and
             fading out before the first section of body copy. */}
         <div

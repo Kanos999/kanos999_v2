@@ -12,10 +12,58 @@ export const person = {
   country: "AU",
   email: "hello@kanejackson.com",
   university: "UNSW Sydney",
+  universityLegalName: "University of New South Wales",
   degree: "B.E. (Hons) Mechatronic Engineering and B.Sc. Computer Science",
   graduating: "Dec 2026",
   // Drop the PDF at /public/kane-jackson-cv.pdf for this link to resolve.
   cv: "/kane-jackson-cv.pdf",
+
+  /* Entity disambiguation ------------------------------------------------
+   * There is a better known Kane Jackson in Australian fintech. The aim is
+   * not to outrank him for the bare name, it is to be unmistakably a
+   * different person: space rather than finance, Sydney rather than
+   * Melbourne, ANT61 and UNSW rather than his employer and school.
+   *
+   * `alternateName` gives the name a second surface form to match on, and
+   * `descriptor` is the qualifier that rides along with the name in titles
+   * so the two entities never have to be told apart from context alone.
+   */
+  alternateName: "Kane H. Jackson",
+  descriptor: "Space Software Engineer",
+};
+
+/**
+ * Organisations Kane is linked to, kept here so the same URLs are used as
+ * structured data `@id`s, as llms.txt links, and as visible page copy. A
+ * consistent URL is what lets a search engine merge these into one entity
+ * rather than treating each mention as a new unknown.
+ */
+export const orgs = {
+  ant61: {
+    name: "ANT61",
+    url: "https://www.ant61.com/",
+    description: "Space robotics company building satellite recovery and diagnostics hardware.",
+  },
+  innersteps: {
+    name: "InnerSteps",
+    url: "https://www.innersteps.org/",
+    // Engineering credential only. Their clinical and marketing claims are
+    // theirs to make, not ours to repeat.
+    description: "Australian developer of a children's mobile application.",
+  },
+  unsw: {
+    name: "University of New South Wales",
+    alternateName: "UNSW Sydney",
+    url: "https://www.unsw.edu.au/",
+  },
+};
+
+/** The ANT61 product Kane works on. The strongest single name+work signal. */
+export const beacon = {
+  name: "ANT61 Beacon",
+  url: "https://www.ant61.com/beacon",
+  description:
+    "A satellite recovery and diagnostics module providing independent two way inter satellite communication, real time spacecraft telemetry and anomaly detection, and remote recovery when a spacecraft's primary systems fail.",
 };
 
 export const socials = [
